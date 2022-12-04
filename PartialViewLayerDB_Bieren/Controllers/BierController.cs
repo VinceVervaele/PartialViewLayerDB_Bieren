@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using PartialView.Service;
+using AutoMapper;
 using PartialViewLayerDB_Bieren.ViewModels;
 
 namespace PartialViewLayerDB_Bieren.Controllers
@@ -8,29 +10,22 @@ namespace PartialViewLayerDB_Bieren.Controllers
     {
         private readonly BierService _bierService;
 
-        public BierController()
+        private readonly IMapper _mapper;
+
+        public BierController(IMapper mapper)
         {// Later with DI
             _bierService = new BierService();
+
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
             var lstBier = _bierService.GetAll();  // Domain objects
-            List<BierVM> bierVMs = new List<BierVM>();
+            List<BierVM> bierVMs = null;
 
             if (lstBier != null)
             {
-                foreach (var bier in lstBier)
-                {
-                    var bierVM = new BierVM();
-                    // later we use an automapper
-                    bierVM.Naam = bier.Naam;
-                    bierVM.Brouwernaam = bier.BrouwernrNavigation.Naam;
-                    bierVM.Soortnaam = bier.SoortnrNavigation.Soortnaam;
-                    bierVM.Alchohol = bier.Alcohol;
-                    bierVM.Image = bier.Image;
-                   
-                    bierVMs.Add(bierVM);
-                }
+                bierVMs = _mapper.Map<List<BierVM>>(lstBier);
             }
 
             return View(bierVMs);  // Always VM 
