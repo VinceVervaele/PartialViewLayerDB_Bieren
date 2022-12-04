@@ -13,9 +13,9 @@ namespace PartialViewLayerDB_Bieren.Controllers
 
         public BrewerController(IMapper mapper)
         {// Later with DI
-            _brewerService = new BrewerService();
-
             _mapper = mapper;
+
+            _brewerService = new BrewerService();
         }
         public IActionResult Index()
         {
