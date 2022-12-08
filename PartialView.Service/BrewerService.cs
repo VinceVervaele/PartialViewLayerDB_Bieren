@@ -17,9 +17,9 @@ namespace PartialView.Service
             brewerDAO = new BrewerDAO();
         }
 
-        public IEnumerable<Brewery>? GetAll()
+        public async Task<IEnumerable<Brewery>?> GetAll()
         {
-            return brewerDAO.GetAll();
+            return await brewerDAO.GetAll();
         }
     }
 }

@@ -17,9 +17,9 @@ namespace PartialViewLayerDB_Bieren.Controllers
 
             _brewerService = new BrewerService();
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var lstBrewers = _brewerService.GetAll();  // Domain objects
+            var lstBrewers = await _brewerService.GetAll();  // Domain objects
             List<BrewerVM> brewerVMs = null;
 
             if (lstBrewers != null)
