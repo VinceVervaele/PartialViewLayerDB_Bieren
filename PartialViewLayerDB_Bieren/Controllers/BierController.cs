@@ -78,6 +78,8 @@ namespace PartialViewLayerDB_Bieren.Controllers
 
             ViewBag.lstBrouwer = new SelectList(await _breweryService.GetAll(), "Naam", "Naam");
 
+            ViewBag.Naam = brouwerId;
+
             List<BierVM> bierVMs = null;
 
             if (lstBier != null)
