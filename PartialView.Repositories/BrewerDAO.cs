@@ -1,4 +1,5 @@
-﻿using PartialView.Models.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PartialView.Models.Data;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,13 +18,13 @@ namespace PartialView.Repositories
             _dbContext = new BierDBcontext();
         }
 
-        public IEnumerable<Models.Entities.Brewery>? GetAll()
+        public async Task<IEnumerable<Models.Entities.Brewery>?> GetAll()
         {
             //SQL "select * from Adult"
 
             try
             {
-                return _dbContext.Breweries.ToList();
+                return await _dbContext.Breweries.ToListAsync();
             }
             catch (Microsoft.Data.SqlClient.SqlException ex)
             {

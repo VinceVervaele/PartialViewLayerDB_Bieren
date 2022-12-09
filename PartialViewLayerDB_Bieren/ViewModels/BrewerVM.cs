@@ -2,6 +2,7 @@
 {
     public class BrewerVM
     {
+        public int Brouwernr { get; set; }  
         public string? Naam { get; set; }
         public string? Adres { get; set; }
         public string? Postcode { get; set; }
